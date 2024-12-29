@@ -2,6 +2,12 @@
 - hosts: all
   gather_facts: true
   become: true
+  tasks:
+    - name: Show interpreter
+      debug: var=ansible_python_interpreter
+
+    - name: Get interpreter version
+      command: "{{ ansible_python_interpreter }} --version"
   roles:
   - common
   #- grid

@@ -1,0 +1,31 @@
+- name: Check if Python is installed
+  hosts: testhost
+  gather_facts: no
+  tasks:
+    - name: Check for Python 3
+      command: python3 --version
+      register: python3_result
+      ignore_errors: yes
+
+    - name: Check for Python 2
+      command: python --version
+      register: python2_result
+      ignore_errors: yes
+      when: python3_result is failed
+
+    - name: Report Python 3 version
+      debug:
+        msg: "Python 3 is installed: {{ python3_result.stdout }}"
+      when: python3_result is succeeded
+
+    - name: Report Python 2 version
+      debug:
+        msg: "Python 2 is installed: {{ python2_result.stdout }}"
+      when: python2_result is succeeded
+
+    - name: Report Python not found
+      debug:
+        msg: "Python is not installed"
+      when: python3_result is failed and python2_result is failed
+
+      

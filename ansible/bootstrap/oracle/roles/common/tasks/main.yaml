@@ -1,3 +1,10 @@
+- name: Gather package manager facts
+  setup:
+    filter: ansible_pkg_mgr
+
+- name: Debug package manager facts
+  debug:
+    var: ansible_pkg_mgr
 
 - name: install x86_64 oracle dependencies
   yum:
@@ -5,15 +12,15 @@
     update_cache: yes
   vars:
     packages:
-    - oracle-database-preinstall-19c
-    - unzip
-    - jq
+      - oracle-database-preinstall-19c
+      - unzip
+      - jq
 - name: selinux dependencies
   yum:
     name: "{{ packages }}"
   vars:
     packages:
-    - libselinux-python
+      - libselinux-python3
 
 - name: set up the oracle hostnames
   lineinfile:
@@ -44,7 +51,6 @@
 - name: save sysctl config
   command: sysctl -p
   ignore_errors: true
-
 
 - name: Change Linux Swap Size
   replace:
@@ -110,6 +116,27 @@
     password: "{{ oracle_pass }}"
     append: yes
 
+# - name: Check if /dev/disk/azure exists and is not a directory
+#   stat:
+#     path: /dev/disk/azure
+#   register: azure_path
+
+# - name: Remove /dev/disk/azure if it is not a directory
+#   file:
+#     path: /dev/disk/azure
+#     state: absent
+#   become: true
+
+# - name: Create /dev/disk/azure/scsi1 directory
+#   file:
+#     path: /dev/disk/azure/scsi1
+#     state: directory
+#     mode: "0755"
+#   become: true
+
+# - name: Add a symlink to /dev/disk/azure/scsi1/lun1
+#   command: sudo ln -s /dev/sdb {{data_device}}
+#   become: true
 
 - name: Create partition on data disk
   parted:
@@ -125,9 +152,9 @@
   when: storage_type == "FS"
 
 - name: Get UUID for partition
-  command: blkid -s UUID -o value "{{ data_device }}-part1"
+  command: blkid -s UUID -o value "{{data_device}}-part1"
   register: disk_blkid
-  when: storage_type == "FS"  
+  when: storage_type == "FS"
 
 - name: Mount data disk
   mount:

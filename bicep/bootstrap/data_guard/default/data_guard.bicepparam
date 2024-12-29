@@ -1,12 +1,12 @@
 using '../../main.bicep'
 
-param resourceGroupName = '<rgName>'
+param resourceGroupName = 'rg-mh-oracle-3'
 
-param location = '<location>'
+param location = 'germanywestcentral'
 
 param virtualNetworks = [
   {
-    virtualNetworkName: 'vnet1'
+    virtualNetworkName: 'vnet4'
     addressPrefixes: [
       '10.0.0.0/16' ]
     subnetName: 'subnet1'
@@ -28,10 +28,10 @@ param virtualMachines = [
     adminUsername: 'oracle'
     managedIdentities: {
       userAssignedResourceIds: [
-        '<userAssignedId>'
+        '/subscriptions/9c68d2ae-d3d6-4784-8e4c-7ae6ae5e0312/resourcegroups/rg-mh-oracle/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-mh'
       ]
     }
-    sshPublicKey: '<sshKey>'
+    sshPublicKey: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO8eep97lY3XKvnFbyNZjIy8AI1lhbYtFZpRMNdEJx11 akis100@CPC-admin-1DC4C'
     dataDisks: [
       {
         caching: 'None'
@@ -61,15 +61,15 @@ param virtualMachines = [
   }
   {
     virtualMachineName: 'vm-secondary-0'
-    vmSize: 'Standard_D4s_v5'
+    vmSize: 'Standard_E4ds_v5'
     avZone: 2
     adminUsername: 'oracle'
     managedIdentities: {
       userAssignedResourceIds: [
-        '<userAssignedId>'
+        '/subscriptions/9c68d2ae-d3d6-4784-8e4c-7ae6ae5e0312/resourcegroups/rg-mh-oracle/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-mh'
       ]
     }
-    sshPublicKey: '<sshKey>'
+    sshPublicKey: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO8eep97lY3XKvnFbyNZjIy8AI1lhbYtFZpRMNdEJx11 akis100@CPC-admin-1DC4C'
     dataDisks: [
       {
         caching: 'None'
@@ -106,8 +106,8 @@ param tags = {
 
 param oracleImageReference = {
   publisher: 'oracle'
-  offer: 'oracle-database-19-3'
-  sku: 'oracle-database-19-0904'
+  offer: 'oracle-linux'
+  sku: 'ol9-lvm-gen2'
   version: 'latest'
 }
 

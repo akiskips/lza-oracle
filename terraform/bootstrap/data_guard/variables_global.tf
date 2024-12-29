@@ -4,12 +4,12 @@
 variable "location" {
   description = "Defines the Azure location where the resources will be deployed"
   type        = string
-  default     = "uksouth"
+  default     = "germanywestcentral"
 }
 
 variable "resourcegroup_name" {
   description = "If defined, the name of the resource group into which the resources will be deployed"
-  default     = ""
+  default     = "rg-mh-oracle1"
 }
 
 variable "resourcegroup_tags" {
@@ -50,7 +50,7 @@ variable "ssh_key" {
 
 variable "vm_sku" {
   description = "The SKU of the virtual machine"
-  default     = "Standard_D4s_v3"
+  default     = "Standard_D4s_v5"
 }
 
 variable "vm_source_image_reference" {
@@ -103,31 +103,6 @@ variable "vm_extensions" {
     }))
   }))
   default = {}
-}
-
-variable "lock" {
-  type = object({
-    name = optional(string, null)
-    kind = optional(string, "None")
-  })
-  default     = {}
-  description = <<LOCK
-"The lock level to apply to all child resources. The default value is none. Possible values are `None`, `CanNotDelete`, and `ReadOnly`. Set the lock value on child resource values explicitly to override any inherited locks." 
-
-Example Inputs:
-```hcl
-lock = {
-  name = "lock-{resourcename}" # optional
-  type = "CanNotDelete" 
-}
-```
-LOCK
-  nullable    = false
-
-  validation {
-    condition     = contains(["CanNotDelete", "ReadOnly", "None"], var.lock.kind)
-    error_message = "The lock level must be one of: 'None', 'CanNotDelete', or 'ReadOnly'."
-  }
 }
 
 

@@ -30,7 +30,7 @@ The components are created as follows:
 7. To be able to leverage the solution accelerator for other platforms than Oracle Enterprise Linux and since the Oracle database version in the Oracle marketplace images is fairly old, the accelerator is dependent on Oracle binaries being present on a storage account in your environment. To this end you need to create the following items in your environment:
     - A storage account accessible from the virtual network where the Oracle VMs are to be deployed.
     - A container in the storage account where the Oracle binaries are stored.
-    - A user assigned managed identity with read access to the storage account and the container.
+    - A user assigned managed identity with read storage blob access (Storage Blob data reader role) to the storage account and the container.
     - Oracle 19c binaries in zip file format uploaded to the container. Testing has been done with version 19.3 downloaded from [here](https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html#license-lightbox).
 
 ## Getting started

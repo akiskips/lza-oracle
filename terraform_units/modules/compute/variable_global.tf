@@ -284,6 +284,12 @@ variable "enable_ultradisk" {
   default     = false
 }
 
+variable "enable_hibernation" {
+  description = "Enable Hibernation"
+  type        = bool
+  default     = false
+}
+
 variable "public_ip_address_resource_id" {
   description = "The resource id of the public IP address"
   type        = string

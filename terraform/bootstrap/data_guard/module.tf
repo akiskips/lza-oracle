@@ -8,9 +8,6 @@ module "common_infrastructure" {
   is_diagnostic_settings_enabled = var.is_diagnostic_settings_enabled
   diagnostic_target              = var.diagnostic_target
   tags                           = var.resourcegroup_tags
-  subscription_locks             = var.lock
-  resource_group_locks           = var.lock
-
 
 }
 
@@ -41,7 +38,6 @@ module "vm_primary" {
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
   tags                           = module.common_infrastructure.tags
-  vm_lock                        = var.lock
   db_subnet                      = module.network.db_subnet
 
   availability_zone = 1
@@ -117,7 +113,6 @@ module "vm_secondary" {
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
   tags                           = module.common_infrastructure.tags
-  vm_lock                        = var.lock
   db_subnet                      = module.network.db_subnet
 
 
@@ -173,10 +168,6 @@ module "network" {
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
   tags                           = module.common_infrastructure.tags
-  nsg_locks                      = var.lock
-  subnet_locks                   = var.lock
-  vnet_locks                     = var.lock
-
 
 
   #ToDo: role_assignments_nic

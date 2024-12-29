@@ -102,9 +102,7 @@ locals {
           #   }
           # }
 
-          #Todo: nic Locks
-          lock_level = var.nic_locks.name != "" ? var.nic_locks.type : ""
-          lock_name  = var.nic_locks.name != "" ? var.nic_locks.name : ""
+
         }
       }
     }

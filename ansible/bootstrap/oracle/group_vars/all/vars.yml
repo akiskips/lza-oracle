@@ -21,6 +21,7 @@ storage_type: FS
 
 
 data_device: /dev/disk/azure/scsi1/lun1
+#data_device: ../../../sdb
 data_disk_mount: /u01
 
 stage_dir: /tmp
@@ -35,7 +36,7 @@ sid: ORCL
 redo_log_filepath: /u01/app/oracle/oradata
 
 # Oracle binaries download information
-storage_account: oraclelzabin
-
-storage_container: oraclebinaries
+storage_account: samhoracle
+vm_user_assigned_identity_id: /subscriptions/9c68d2ae-d3d6-4784-8e4c-7ae6ae5e0312/resourcegroups/Default-ActivityLogAlerts/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-mh
+storage_container: binariescont
 storage_blob: LINUX.X64_193000_db_home.zip
