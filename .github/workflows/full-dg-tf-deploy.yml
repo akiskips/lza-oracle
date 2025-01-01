@@ -100,11 +100,11 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: Get the ID of the user-assigned managed identity
-      run: |
-        usId=$(az identity show --name ${{ env.USER_ASSIGNED_IDENTITY }} --resource-group ${{ env.SOFTWARE_RG }} --query id --output tsv) 
-        usId_modified=$(echo "$usId" | sed 's/resourcegroups/resourceGroups/g')
-        echo "usId=${usId_modified}" >> $GITHUB_ENV
+    # - name: Get the ID of the user-assigned managed identity
+    #   run: |
+    #     usId=$(az identity show --name ${{ env.USER_ASSIGNED_IDENTITY }} --resource-group ${{ env.SOFTWARE_RG }} --query id --output tsv) 
+    #     usId_modified=$(echo "$usId" | sed 's/resourcegroups/resourceGroups/g')
+    #     echo "usId=${usId_modified}" >> $GITHUB_ENV
 
     - name: 🗒️ Create a tfvars file for terraform
       run: |
@@ -121,8 +121,8 @@ jobs:
           "GITHUB_RUN_ID" = "${{ github.run_id }}"
           "GITHUB_WORKFLOW" = "${{ github.workflow }}"
         }
-        vm_user_assigned_identity_id = "${{env.usId}}"
-        is_resource_lock_enabled = false
+        #vm_user_assigned_identity_id = "${{env.usId}}"
+        #is_resource_lock_enabled = false
         #is_diagnostic_settings_enabled = true
         #diagnostic_target              = "Log_Analytics_Workspace"
         
