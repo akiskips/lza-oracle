@@ -93,6 +93,7 @@ jobs:
     - run: echo ${{env.ResourceGroupName}}
     
     #Login to Azure
+    # Check https://github.com/Azure/login?tab=readme-ov-file#login-with-openid-connect-oidc-recommended
     - name: 🔑 Login via Azure CLI
       uses: azure/login@v1
       with:
@@ -121,7 +122,7 @@ jobs:
           "GITHUB_RUN_ID" = "${{ github.run_id }}"
           "GITHUB_WORKFLOW" = "${{ github.workflow }}"
         }
-        #vm_user_assigned_identity_id = "${{env.usId}}"
+        vm_user_assigned_identity_id = "${{env.usId}}"
         #is_resource_lock_enabled = false
         #is_diagnostic_settings_enabled = true
         #diagnostic_target              = "Log_Analytics_Workspace"
