@@ -10,13 +10,13 @@ Overall if you wish to modify one or more variables in the Terraform module, you
 
 ## Configure and run the workflow
 
-First, configure your OpenID Connect as described [here](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Cwindows#use-the-azure-login-action-with-openid-connect).
+First, configure your OpenID Connect as described [here](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Cwindows#use-the-azure-login-action-with-openid-connect). Keep in mind that you need to configure the [federated identity credentials](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust?pivots=identity-wif-apps-methods-azp#configure-a-federated-identity-credential-on-an-app) on your tenant.
 
 Create a Github Secret in your repo with the name SSH_PRIVATE_KEY, containing the private key you wish to use for the deployment.
 
-To deploy through GitHub actions, please refer to the [Data Guard GitHub Terraform workflow](../blob/main/.github/workflows/full-dg-tf-deploy.yml) and follow the guidance below.
+To deploy through GitHub actions, please refer to the [Data Guard GitHub Terraform workflow](.github/workflows/full-dg-tf-deploy.yml) and follow the guidance below.
 
-- Modify the following values in [Data Guard GitHub Terraform workflow](../blob/main/.github/workflows/full-dg-tf-deploy.yml):
+- Modify the following values in [Data Guard GitHub Terraform workflow](.github/workflows/full-dg-tf-deploy.yml):
   - Change _AZ_LOCATION: "eastus"_, to your preferred Azure region
   - Change _AZ_RG_BASENAME: "Oracle-test"_, to your preferred resource group name.
   - Change _VM_PRIMARY_NAME: "vm-primary-0"_, to your preferred name for the primary node in the data guard configuration.
